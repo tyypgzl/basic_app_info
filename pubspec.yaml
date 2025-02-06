@@ -1,7 +1,7 @@
 name: basic_app_info
 description: "App Info Package"
 homepage: "https://tguzel.dev"
-version: 1.0.0+1
+version: 1.1.0
 
 environment:
   sdk: ^3.5.4
