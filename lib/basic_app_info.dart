@@ -27,6 +27,7 @@ final class AppInfo {
     required this.buildNumber,
     required this.system,
     required this.device,
+    required this.sdkInt,
     required this.isPhysicalDevice,
     this.installerStore,
   });
@@ -73,6 +74,11 @@ final class AppInfo {
   /// The device on which the app is running.
   final String device;
 
+  /// The user-visible SDK version of the framework.
+  ///
+  /// Possible values are defined in: https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+  final int sdkInt;
+
   /// false if the application is running in an emulator, true otherwise.
   final bool isPhysicalDevice;
 
@@ -93,6 +99,7 @@ final class AppInfo {
           system: System.android,
           device: androidInfo.model,
           isPhysicalDevice: androidInfo.isPhysicalDevice,
+          sdkInt: androidInfo.version.sdkInt,
         );
       } else if (Platform.isIOS) {
         final iosInfo = await deviceInfoPlugin.iosInfo;
@@ -106,6 +113,7 @@ final class AppInfo {
           system: System.ios,
           device: iosInfo.utsname.machine,
           isPhysicalDevice: iosInfo.isPhysicalDevice,
+          sdkInt: 0,
         );
       } else {
         throw const AppInfoException('Unsupported platform');
